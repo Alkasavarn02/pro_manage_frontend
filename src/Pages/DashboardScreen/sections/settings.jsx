@@ -4,7 +4,7 @@ import InputField from "../../../Components/InputComponents";
 import CustomButton from "../../../Components/ButtonComponent";
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../../../context/userContext";
-import { getUpdatedUser, updateUser } from "../../../services/auth";
+import { getUpdatedUser, handleLogout, updateUser } from "../../../services/auth";
 import { useNavigate } from "react-router-dom";
 
 const minLength = 8;
@@ -65,8 +65,16 @@ function Settings(){
                 .then((res) => {
                     if(res?.status === 200){
                         alert(`${res?.data?.message}`)
+                        return handleLogout();
+                    }
+                })
+                .then((res)=>{
+                    if(res?.data?.success){
+                        localStorage.removeItem("user")
+                        localStorage.removeItem("email")
+                        localStorage.removeItem("token")
                         setTimeout(()=>{
-                            navigate("/")
+                            navigate("/login")
                         },1000)
                     }
                 })
