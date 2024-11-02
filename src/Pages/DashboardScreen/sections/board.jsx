@@ -71,6 +71,9 @@ const Board = ()=>{
         .then((res) => {
             setUserInfo(res?.data?.data)
         })
+        .catch((err)=>{
+            alert(`${err?.data?.message}`)
+        })
     }
 
     useEffect(()=>{

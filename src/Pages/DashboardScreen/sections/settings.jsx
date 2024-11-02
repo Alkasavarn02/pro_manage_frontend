@@ -106,6 +106,9 @@ function Settings(){
                 }
             )
         })
+        .catch((err)=>{
+            alert(`${err?.data?.message}`)
+        })
     }
 
     useEffect(()=>{
