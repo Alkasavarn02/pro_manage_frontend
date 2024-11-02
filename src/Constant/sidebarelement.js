@@ -1,4 +1,4 @@
-import ProIcon from "../assets/promanageIcon.png";
+import ProIcon from "../assets/promanageicon.png";
 import BoardIcon from "../assets/Board.png";
 import AnalyticsIcon from "../assets/database.png";
 import SettingIcon from "../assets/settings.png";
