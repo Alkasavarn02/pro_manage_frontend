@@ -36,6 +36,16 @@ function CreateTask({ onCancel, fetchAllTask, data }) {
    const [isSubmitting, setIsSubmitting] = useState(false);
 
    const dueDateRef = useRef(null);
+
+   const useDebounce = (func, delay) => {
+      const timeoutRef = useRef(null);
+   
+      return (...args) => {
+         clearTimeout(timeoutRef.current);
+         timeoutRef.current = setTimeout(() => func(...args), delay);
+      };
+   };
+
    const [createTask, setCreateTask] = useState({
       title: "",
       priority: "",
@@ -133,6 +143,8 @@ function CreateTask({ onCancel, fetchAllTask, data }) {
 
       }
    };
+
+   const debouncedCreateTask = useDebounce(onCreateTask, 300);
 
    useEffect(() => {
       if(data) {
@@ -336,7 +348,7 @@ function CreateTask({ onCancel, fetchAllTask, data }) {
                      buttonType={'primary'}
                      classes={`${styles['save']}`}
                      type={'submit'}
-                     onClick={onCreateTask}
+                     onClick={debouncedCreateTask}
                      disabled={isSubmitting}
                   />
                </div>
