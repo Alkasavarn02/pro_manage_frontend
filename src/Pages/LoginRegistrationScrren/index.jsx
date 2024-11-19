@@ -15,6 +15,8 @@ function LoginRegistrationScreen({screen}){
     const [errors,setErrors] = useState(null);
     const [viewPassword, setViewPassword] = useState(false);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const navigate = useNavigate();
 
     const onInputChange = (e)=>{
@@ -70,6 +72,8 @@ function LoginRegistrationScreen({screen}){
 
         } else {
             setErrors(null)
+            if(isLoading) return;
+            setIsLoading(true);
             try {
                 const res = await login(userData);            
                 if (res.status === 201) {
@@ -90,6 +94,8 @@ function LoginRegistrationScreen({screen}){
                 } else {
                     alert("Something went wrong. Please try again.");
                 }
+            } finally {
+                setIsLoading(false); // Re-enable button when request is complete
             }
         }
     };
@@ -161,11 +167,12 @@ function LoginRegistrationScreen({screen}){
                 
                 <CustomButton
                     buttonType='primary'
-                    title={ screen==="Register" ? "Register" : "Login"}
+                    title={isLoading ? "Logging In..." : (screen === "Register" ? "Register" : "Login")}
                     type={'submit'}
                     onClick={
                         screen === "Register" ? submitFormRegister : submitLogin
                     }
+                    disabled={isLoading}
                 />
 
                 {
@@ -181,6 +188,7 @@ function LoginRegistrationScreen({screen}){
                         e.preventDefault();
                         screen === "Register" ? navigate("/login") : navigate("/register")
                     }}
+
                 />
 
             </div>
