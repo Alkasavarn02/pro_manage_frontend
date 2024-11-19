@@ -167,7 +167,7 @@ function LoginRegistrationScreen({screen}){
                 
                 <CustomButton
                     buttonType='primary'
-                    title={isLoading ? "Logging In..." : (screen === "Register" ? "Register" : "Login")}
+                    title={ screen==="Register" ? "Register" : "Login"}
                     type={'submit'}
                     onClick={
                         screen === "Register" ? submitFormRegister : submitLogin
@@ -188,7 +188,7 @@ function LoginRegistrationScreen({screen}){
                         e.preventDefault();
                         screen === "Register" ? navigate("/login") : navigate("/register")
                     }}
-
+                    
                 />
 
             </div>
