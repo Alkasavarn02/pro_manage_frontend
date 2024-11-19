@@ -33,6 +33,7 @@ function CreateTask({ onCancel, fetchAllTask, data }) {
    const {userInfo} = useContext(AppContext);
 
    const [showAssignieDropdown,setShowAssignieDropdown] = useState(false);
+   const [isSubmitting, setIsSubmitting] = useState(false);
 
    const dueDateRef = useRef(null);
    const [createTask, setCreateTask] = useState({
@@ -83,7 +84,6 @@ function CreateTask({ onCancel, fetchAllTask, data }) {
       })
    };
 
-
    const onDeleteCheckList = (id) => {
       const remainingList = checklist?.filter((item) => item?._id !== id);
       setChecklist(remainingList);
@@ -97,6 +97,7 @@ function CreateTask({ onCancel, fetchAllTask, data }) {
          setError("Please provide task title, priority and atleast one checklist")
       } else {
          setError("")
+         setIsSubmitting(true);
          const payload = {
             ...createTask,
             checkList: [...checklist],
@@ -125,6 +126,8 @@ function CreateTask({ onCancel, fetchAllTask, data }) {
                }
             } catch(err){
                alert("Something went wrong please try again", err);
+            } finally {
+               setIsSubmitting(false);
             }
          }
 
@@ -334,6 +337,7 @@ function CreateTask({ onCancel, fetchAllTask, data }) {
                      classes={`${styles['save']}`}
                      type={'submit'}
                      onClick={onCreateTask}
+                     disabled={isSubmitting}
                   />
                </div>
             </div>
