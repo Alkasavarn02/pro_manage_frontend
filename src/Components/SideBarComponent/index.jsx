@@ -19,17 +19,14 @@ function SideBar({screen}){
     const onLogout = async() => {
 
         try {
-
             const res = await handleLogout();
             if(res?.data?.success){
                 localStorage.removeItem("user")
                 localStorage.removeItem("email")
                 localStorage.removeItem("token")
-                setTimeout(()=>{
-                    navigate("/login")
-                },1000)
-            }
 
+                navigate("/login")
+            }
         } catch(err){
             alert(`Something went wrong please try again later, ${err}`)
         }

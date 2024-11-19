@@ -74,6 +74,7 @@ function LoginRegistrationScreen({screen}){
             setErrors(null)
             if(isLoading) return;
             setIsLoading(true);
+            
             try {
                 const res = await login(userData);            
                 if (res.status === 201) {
@@ -95,7 +96,7 @@ function LoginRegistrationScreen({screen}){
                     alert("Something went wrong. Please try again.");
                 }
             } finally {
-                setIsLoading(false); // Re-enable button when request is complete
+                setIsLoading(false);
             }
         }
     };

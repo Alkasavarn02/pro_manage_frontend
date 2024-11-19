@@ -2,6 +2,7 @@ import styles from "./logoutmodal.module.css";
 import CustomButton from "../../Components/ButtonComponent";
 
 function LogoutDeleteModal({screen , onClick, onCancel , id}){
+
     return (
         <div className={styles['logout-modal']}>
             {
