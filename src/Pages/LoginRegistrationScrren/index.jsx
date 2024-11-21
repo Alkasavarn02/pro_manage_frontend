@@ -42,6 +42,9 @@ function LoginRegistrationScreen({screen}){
 
         } else {
             setErrors(null)
+            if(isLoading) return;
+            setIsLoading(true);
+            
             try {
                 const res = await register(userData);
                 
