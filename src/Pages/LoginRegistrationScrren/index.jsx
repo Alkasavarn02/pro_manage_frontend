@@ -44,7 +44,7 @@ function LoginRegistrationScreen({screen}){
             setErrors(null)
             if(isLoading) return;
             setIsLoading(true);
-            
+
             try {
                 const res = await register(userData);
                 
@@ -133,7 +133,6 @@ function LoginRegistrationScreen({screen}){
                 {
                     screen && <h1>{screen}</h1>
                 }
-
                 <form action="" className={`${styles[`form-field`]}`}>
                     {
                         inputTextField(screen, viewPassword)?.map((input) => {
